@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:behaviors="clr-namespace:WeatherApp.Behaviors;assembly=WeatherApp"
+             x:Class="WeatherApp.App">
+    <Application.Resources>
+        <!-- COLORS -->
+        <Color x:Key="WhiteColor">#ffffff</Color>
+        <Color x:Key="BlackColor">#000000</Color>
+        <Color x:Key="GreenColor">#00A69C</Color>
+        <Color x:Key="AccentColor">#00857D</Color>
+        <Color x:Key="ErrorColor">#ff5252</Color>
+        <!-- FONTS -->
+        <OnPlatform x:Key="LargeSize"
+                        x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="16" />
+            <On Platform="Android, UWP, WinRT, WinPhone" Value="18" />
+        </OnPlatform>
+        <Style x:Key="Label1" TargetType="{x:Type Label}">
+            <Setter Property="TextColor" Value="Gray"/>
+            <Setter Property="FontSize" Value="Micro"/>
+            <Setter Property="Margin" Value="10,0,0,0"/>
+        </Style>
+        <Style x:Key="Label2" TargetType="{x:Type Label}">
+            <Setter Property="HeightRequest" Value="17"/>
+            <Setter Property="TextColor" Value="Gray"/>
+            <Setter Property="FontSize" Value="Micro"/>
+            <Setter Property="Margin" Value="20,0,0,0"/>
+        </Style>
+        
+        <Style x:Key="UwpEntryStyle"
+                   TargetType="{x:Type Entry}">
+            <!--<Setter Property="FontFamily"
+                        Value="{StaticResource MontserratRegular}" />-->
+            <Setter Property="TextColor"
+                        Value="{StaticResource BlackColor}" />
+            <Setter Property="PlaceholderColor"
+                        Value="{StaticResource BlackColor}" />
+            <Setter Property="FontSize"
+                        Value="{StaticResource LargeSize}" />
+            <Setter Property="HorizontalOptions"                      
+                        Value="FillAndExpand" />
+            <Setter Property="FontAttributes"
+                        Value="Bold" />
+            <Setter Property="BackgroundColor" 
+                        Value="Transparent" />
+            <Setter Property="Opacity"
+                        Value="0.6" />
+            <Setter Property="behaviors:LineColorBehavior.ApplyLineColor"
+                        Value="True" />
+            <Setter Property="behaviors:LineColorBehavior.LineColor"
+                        Value="Gray" />
+            <Style.Triggers>
+                <Trigger TargetType="Entry"
+                       Property="IsFocused"
+                       Value="True">
+                    <Setter Property="Opacity" Value="1" />
+                    <Setter Property="behaviors:LineColorBehavior.LineColor"                        
+                                Value="{StaticResource GreenColor}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        
+        <Style x:Key="EntryStyle"
+                   TargetType="{x:Type Entry}">
+            <!--<Setter Property="FontFamily"
+                        Value="{StaticResource MontserratRegular}" />-->
+            <Setter Property="HeightRequest" Value="24"/>
+            <Setter Property="TextColor"  Value="White" />
+            <Setter Property="PlaceholderColor" Value="White" />
+            <Setter Property="FontSize" Value="Small" />
+            <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="BackgroundColor" Value="Transparent" />
+            <Setter Property="Opacity" Value="0.4" />
+            <Setter Property="behaviors:LineColorBehavior.ApplyLineColor" Value="True" />
+            <Setter Property="behaviors:LineColorBehavior.LineColor" Value="Black" />
+            <Style.Triggers>
+                <Trigger TargetType="Entry"
+                             Property="IsFocused" 
+                             Value="True">
+                    <Setter Property="Opacity" Value="1" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Application.Resources>
+</Application>

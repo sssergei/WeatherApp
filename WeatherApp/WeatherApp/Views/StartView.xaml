@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WeatherApp.Views.StartView"
+             xmlns:viewModelBase="clr-namespace:WeatherApp.ViewModels.Base;assembly=WeatherApp"
+             xmlns:res="clr-namespace:WeatherApp.Resources;assembly=WeatherApp"
+             xmlns:behaviors="clr-namespace:WeatherApp.Behaviors;assembly=WeatherApp"
+             Title="WeatherApp.Android"
+             viewModelBase:ViewModelLocator.AutoWireViewModel="true">
+    <ContentPage.Content>
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <StackLayout Grid.Row="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="White">
+                <Label Text="WeatherApp.Android" TextColor="Black" Margin="30,10,0,0" FontSize="Subtitle" FontAttributes="Bold"/>
+            </StackLayout>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" Text="Search by zip code" TextColor="White" FontSize="Micro" FontAttributes="Bold"/>
+                <Label Grid.Row="1" Grid.Column="0" Text="Zip Code"/>
+                <Entry Grid.Row="2" Grid.Column="0" Style="{StaticResource EntryStyle}"
+                      Text="{Binding ZipCode.Value, Mode=TwoWay}"
+                      Placeholder="{x:Static res:AppResource.EntryZipCode}"
+                      FontAttributes="Italic"
+                      MaxLength="100">
+                    <Entry.Style>
+                        <OnPlatform x:TypeArguments="Style">
+                            <On Platform="iOS, Android" Value="{StaticResource EntryStyle}" />
+                            <On Platform="UWP, WinRT, WinPhone" Value="{StaticResource UwpEntryStyle}" />
+                        </OnPlatform>
+                    </Entry.Style>
+                    <Entry.Behaviors>
+                        <behaviors:EventHandlerBehavior EventName="TextChanged">
+                            <behaviors:InvokeCommandAction Command="{Binding ValidateZipCommand}" />
+                        </behaviors:EventHandlerBehavior>
+                    </Entry.Behaviors>
+                    <Entry.Triggers>
+                        <DataTrigger 
+							TargetType="Entry"
+							Binding="{Binding ZipCode.IsValid}"
+							Value="False">
+                            <Setter Property="behaviors:LineColorBehavior.LineColor" Value="{StaticResource ErrorColor}" />
+                        </DataTrigger>
+                    </Entry.Triggers>
+                </Entry>
+                <Button Grid.Row="2" Grid.Column="1"  IsEnabled="{Binding IsEnableWeatherButton, Mode=OneWay}" Text="GET WEATHER"  Command="{Binding GetWeatherCommand}" />
+            </Grid>
+            <Grid Grid.Row="2" BackgroundColor="White">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Text="Location" Style="{StaticResource Label1}"/>
+                <Label Grid.Row="1" Text="{Binding Location.Value}" Style="{StaticResource Label2}"/>
+                <Label Grid.Row="2" Text="Temperature" Style="{StaticResource Label1}"/>
+                <Label Grid.Row="3" Text="{Binding Temperature.Value}" Style="{StaticResource Label2}"/>
+                <Label Grid.Row="4" Text="Wind Speed" Style="{StaticResource Label1}"/>
+                <Label Grid.Row="5" Text="{Binding WindSpeed.Value}" Style="{StaticResource Label2}"/>
+                <Label Grid.Row="6" Text="Humidity" Style="{StaticResource Label1}"/>
+                <Label Grid.Row="7" Text="{Binding Humidity.Value}" Style="{StaticResource Label2}"/>
+                <Label Grid.Row="8" Text="Visibility" Style="{StaticResource Label1}"/>
+                <Label Grid.Row="9" Text="{Binding Visibility.Value}" Style="{StaticResource Label2}"/>
+                <Label Grid.Row="10" Text="Time of Sunrise" Style="{StaticResource Label1}"/>
+                <Label Grid.Row="11" Text="{Binding TimeofSunrise.Value}" Style="{StaticResource Label2}"/>
+                <Label Grid.Row="12" Text="Time of Sunset" Style="{StaticResource Label1}"/>
+                <Label Grid.Row="13" Text="{Binding TimeofSunset.Value}" Style="{StaticResource Label2}"/>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
