@@ -11,12 +11,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Services\Db\DataModels\Main.cs~RF165268ea.TMP" />
-    <None Remove="Services\Db\DataModels\Sys.cs~RF165a210d.TMP" />
-    <None Remove="Services\Navigation\NavigationService.cs~RF13f6f41d.TMP" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
     <PackageReference Include="SQLiteNetExtensions" Version="2.1.0" />
