@@ -9,6 +9,7 @@ using WeatherApp.Validations;
 using Newtonsoft.Json;
 using WeatherApp.Data.Weather_Zone;
 using WeatherApp.Help;
+using WeatherApp.Services.Db;
 
 namespace WeatherApp.ViewModels
 {
@@ -16,11 +17,13 @@ namespace WeatherApp.ViewModels
     {
         ILogService _logService;
         IWeatherService _weatherService;
+        IDataService _dataService;
 
-        public StartViewModel(IWeatherService weatherService, ILogService logService)
+        public StartViewModel(IWeatherService weatherService, IDataService dataService, ILogService logService)
         {
             _weatherService = weatherService;
             _logService = logService;
+            _dataService = dataService;
             _zipCode = new ValidatableObject<string>();
         }
 
@@ -186,12 +189,15 @@ namespace WeatherApp.ViewModels
             {
                 var responce = await _weatherService.GetWeatherAsync(ZipCode.Value);
                 if (string.IsNullOrEmpty(responce.Trim()))
-                { 
-                    return; 
+                {
+                    WeatherZone d = _dataService.GetWeather(ZipCode.Value);
+                    SetData(d);
+                    return;
                 }
                 var weather = JsonConvert.DeserializeObject<WeatherZone>(responce);
                 if (weather == null) return;
                 SetData(weather);
+                _dataService.AddWeather(weather, ZipCode.Value);
             }
             catch (Exception ex)
             {
