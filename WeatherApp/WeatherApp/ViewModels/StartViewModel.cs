@@ -25,6 +25,7 @@ namespace WeatherApp.ViewModels
             _logService = logService;
             _dataService = dataService;
             _zipCode = new ValidatableObject<string>();
+            AddValidations();
         }
 
         #region PROPERTIES
@@ -166,6 +167,11 @@ namespace WeatherApp.ViewModels
                 RaisePropertyChanged(() => IsEnableWeatherButton);
             }
         }
+        private void AddValidations()
+        {
+            _zipCode.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Can not be empty"});
+            _zipCode.Validations.Add(new IsLength5Rule<string> { ValidationMessage = "Cannot be more than 5" });
+        }
 
         private bool ValidateZipCode()
         {
@@ -175,9 +181,6 @@ namespace WeatherApp.ViewModels
             return IsEnableWeatherButton;
         }
 
-        /// <summary>
-        /// Method call the GetWeatherAsync .
-        /// </summary>
         private async Task GetWeatherAsync()
         {
             if (IsBusy)
@@ -202,6 +205,7 @@ namespace WeatherApp.ViewModels
             catch (Exception ex)
             {
                 await _logService.WriteLogAsync(ex, "async Task GetWeatherAsync()");
+                return;
             }
             finally
             {

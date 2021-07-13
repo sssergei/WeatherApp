@@ -52,6 +52,12 @@
 							Value="False">
                             <Setter Property="behaviors:LineColorBehavior.LineColor" Value="{StaticResource ErrorColor}" />
                         </DataTrigger>
+                        <DataTrigger 
+							TargetType="Entry"
+							Binding="{Binding ZipCode.IsValid}"
+							Value="True">
+                            <Setter Property="behaviors:LineColorBehavior.LineColor" Value="{StaticResource GreenColor}" />
+                        </DataTrigger>
                     </Entry.Triggers>
                 </Entry>
                 <Button Grid.Row="2" Grid.Column="1"  IsEnabled="{Binding IsEnableWeatherButton, Mode=OneWay}" Text="GET WEATHER"  Command="{Binding GetWeatherCommand}" />

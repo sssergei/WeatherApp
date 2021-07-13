@@ -5,7 +5,6 @@ using TinyIoC;
 using WeatherApp.Dependency;
 using WeatherApp.Logger;
 using WeatherApp.Services.Db;
-using WeatherApp.Services.Navigation;
 using WeatherApp.Services.Weather;
 using Xamarin.Forms;
 
@@ -35,23 +34,10 @@ namespace WeatherApp.ViewModels.Base
             _container = new TinyIoCContainer();
 
             _container.Register<StartViewModel>();
-            //_container.Register<SettingsViewModel>().AsSingleton();
-            //_container.Register<DescriptionViewModel>();
-            //_container.Register<WayViewModel>();
-            //_container.Register<SelectWayViewModel>();
-            //_container.Register<CleanSpaceViewModel>();
-
-            _container.Register<INavigationService, NavigationService>();
             _container.Register<IDependencyService, Dependency.DependencyService>();
             _container.Register<IWeatherService, WeatherService>();
-            //_container.Register<IDateService, DateService>();
             _container.Register<IDataService, DataService>();
-            //_container.Register<IJsonService, JsonService>();
-            //_container.Register<IImportService, ImportService>();
-            //_container.Register<IExportService, ExportService>();
-            //_container.Register<IFileService, FileService>();
             _container.Register<ILogService, LogService>().AsSingleton();
-            //_container.Register<IGpsService, GpsService>();
         }
 
         public static void RegisterSingleton<TInterface, T>() where TInterface : class where T : class, TInterface

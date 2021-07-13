@@ -1,14 +1,11 @@
 ﻿using System.Threading.Tasks;
 using System.Windows.Input;
-using WeatherApp.Services.Navigation;
 using Xamarin.Forms;
 
 namespace WeatherApp.ViewModels.Base
 {
     public abstract class ViewModelBase : ExtendedBindableObject
     {
-        protected readonly INavigationService NavigationService;
-
         private bool _isBusy;
 
         public bool IsBusy
@@ -25,11 +22,6 @@ namespace WeatherApp.ViewModels.Base
                 _isBusy = value;
                 RaisePropertyChanged(() => IsBusy);
             }
-        }
-
-        public ViewModelBase()
-        {
-            NavigationService = ViewModelLocator.Resolve<INavigationService>();
         }
 
         public virtual Task InitializeAsync(object navigationData)

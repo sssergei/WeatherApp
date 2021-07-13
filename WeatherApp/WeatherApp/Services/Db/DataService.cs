@@ -5,7 +5,6 @@ using System.Linq;
 using WeatherApp.Services.Db.DataModels;
 using WeatherApp.Logger;
 using System.Globalization;
-using System.Collections.Generic;
 
 namespace WeatherApp.Services.Db
 {

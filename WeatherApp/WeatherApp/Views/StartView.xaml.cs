@@ -13,9 +13,5 @@ namespace WeatherApp.Views
         {
             InitializeComponent();
         }
-        //protected override void OnAppearing()
-        //{
-        //    NavigationPage.SetHasNavigationBar((Xamarin.Forms.Application.Current.MainPage as NavigationPage).CurrentPage, false);
-        //}
     }
 }
